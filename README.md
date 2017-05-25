@@ -1,4 +1,4 @@
-# MapList.js,让object更强大一点
+# MapList.js,让object在强大一点
 
 <ul>
 <li>1. 初始化Map对象 (new Map)</li>
