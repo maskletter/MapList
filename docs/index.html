@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>MapList.js,让object更强大一点</title>
+	<style type="text/css">
+		* { margin: 0px;padding: 0px; }
+		html{ background: #ecf0f5; }
+		#container{ padding: 30px;box-sizing: border-box; }
+		#container h2{ color: #666; }
+		hr{ border: none;border-top: 1px solid #ccc;margin: 20px 0; }
+		.quotes{
+			background: #f8f8f8;border-left: 4px solid #666;padding: 20px 20px 20px 40px;box-sizing: border-box;position: relative;
+			box-shadow: 0 2px 3px rgba(0, 0, 0, 0.125);margin-bottom: 10px;
+		}
+		.quotes .list-index{ position: absolute;left: 20px; }
+		.quotes small{ font-size: 14px;margin-left: 20px; }
+		.quotes .code{
+			position: relative;left: 20px;padding: 20px;box-sizing: border-box;overflow: hidden;
+			background: #f5f5f5;box-shadow: 0 2px 3px rgba(0, 0, 0, 0.125);margin-top: 10px;margin-right: 20px;
+		}
+		.line-number,.code-content{ line-height: 20px;font-size: 13px;float: left;position: relative; }
+		.line-number{ width: 30px;text-align: center;border-right: 1px solid #666;box-sizing: border-box; }
+		.line-number span,.code-content span{ display: block;position: relative; }
+		.code-content{ width: calc(100% - 50px);left: 20px; }
+	</style>
+	<script type="text/javascript" src='../lib/codemirror.js'></script>
+	<script type="text/javascript" src='../lib/javascript.js'></script>
+	<script type="text/javascript" src='../js/MapList.min.js'></script>
+</head>
+<body>
+	<div id="container">
+		<h2>MapList.js,让object更强大一点</h2>
+		<hr>
+		<div class="quotes">
+			<span class="list-index">1. </span>初始化Map对象 <small>(new Map)</small>
+			<div class="code">
+				<div class="line-number">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+					<span>7</span>
+					<span>8</span>
+					<span>9</span>
+					<span>10</span>
+					<span>11</span>
+					<span>12</span>
+				</div>
+				<div class="code-content">
+					<span style="">var database = [</span>
+					<span style="left: 20px;">{ name: '张三', age: 19, gender: '男' },</span>
+					<span style="left: 20px;">{ name: '李四', age: 21, gender: '男' },</span>
+					<span style="left: 20px;">{ name: '王五', age: 42, gender: '女' },</span>
+					<span style="left: 20px;">{ name: '赵六', age: 23, gender: '男' },</span>
+					<span style="">];</span>
+					<span style="">/**</span>
+					<span style="left: 20px;">new Map(name, data);</span>
+					<span style="left: 40px;">	name: 主键，匹配数据的属性值(可以为'')</span>
+					<span style="left: 40px;">	data: 值，可以为任何类型</span>
+					<span style="">*/</span>
+					<span style="">var map = new MapList('name', database);</span>	
+				</div>
+			</div>
+		</div>
+		<div class="quotes">
+			<span class="list-index">2. </span>map.get(url)<small>(url:/张三)</small>
+			<div class="code">
+				<div class="line-number">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+				</div>
+				<div class="code-content">
+					<span style="">/**</span>
+					<span style="left: 20px;">url:</span>
+					<span style="left: 40px;">	if (undefined)，则返回全部</span>
+					<span style="left: 40px;">	else 指定路径信息</span>
+					<span style="">*/</span>
+					<span style="">map.get('/张三')</span>
+				</div>
+			</div>
+		</div>
+		<div class="quotes">
+			<span class="list-index">3. </span>map.add(name, data, url)<small>添加对象</small>
+			<div class="code">
+				<div class="line-number">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+					<span>7</span>
+					<span>8</span>
+					<span>9</span>
+					<span>10</span>
+				</div>
+				<div class="code-content">
+					<span style="">/**</span>
+					<span style="left: 20px;">name:</span>
+					<span style="left: 40px;">	指定data的主键，可以为''，但不得不填</span>
+					<span style="left: 20px;">data:</span>
+					<span style="left: 40px;">	数据</span>
+					<span style="left: 20px;">url:</span>
+					<span style="left: 40px;">	if (undefined)，则根目录添加</span>
+					<span style="left: 40px;">	else 指定路径添加</span>
+					<span style="">*/</span>
+					<span style="">map.get('/张三')</span>
+				</div>
+			</div>
+		</div>
+		<div class="quotes">
+			<span class="list-index">4. </span>map.has(url)<small>判断对象是否存在</small>
+			<div class="code">
+				<div class="line-number">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+				</div>
+				<div class="code-content">
+					<span style="">/**</span>
+					<span style="left: 20px;">url:</span>
+					<span style="left: 40px;">	if (undefined)，则判断根元素</span>
+					<span style="left: 40px;">	else 指定路径对象</span>
+					<span style="">*/</span>
+					<span style="">map.has('/张三')</span>
+				</div>
+			</div>
+		</div>
+		<div class="quotes">
+			<span class="list-index">5. </span>map.empty(url)<small>清除对象</small>
+			<div class="code">
+				<div class="line-number">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+				</div>
+				<div class="code-content">
+					<span style="">/**</span>
+					<span style="left: 20px;">url:</span>
+					<span style="left: 40px;">	if (undefined)，则清空对象</span>
+					<span style="left: 40px;">	else 清空路径对象</span>
+					<span style="">*/</span>
+					<span style="">map.empty('/张三')</span>
+				</div>
+			</div>
+		</div>
+		<div class="quotes">
+			<span class="list-index">6. </span>map.clone(url)<small>复制对象</small>
+			<div class="code">
+				<div class="line-number">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+				</div>
+				<div class="code-content">
+					<span style="">/**</span>
+					<span style="left: 20px;">url:</span>
+					<span style="left: 40px;">	if (undefined)，则复制全部对象</span>
+					<span style="left: 40px;">	else 复制路径对象</span>
+					<span style="">*/</span>
+					<span style="">map.clone('/张三')</span>
+				</div>
+			</div>
+		</div>
+		<div class="quotes">
+			<span class="list-index">7. </span>map.keys(url)<small>获取对象键</small>
+			<div class="code">
+				<div class="line-number">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+				</div>
+				<div class="code-content">
+					<span style="">/**</span>
+					<span style="left: 20px;">url:</span>
+					<span style="left: 40px;">	if (undefined)，则获取全部对象键</span>
+					<span style="left: 40px;">	else 获取路径对象键</span>
+					<span style="">*/</span>
+					<span style="">map.keys('/张三')</span>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" code-output='初始化Map对象 <small>(new Map)</small>' outinput='all'>
+	var database = [
+		{ name: '张三', age: 19, gender: '男' },
+		{ name: '李四', age: 21, gender: '男' },
+		{ name: '王五', age: 42, gender: '女' },
+		{ name: '赵六', age: 23, gender: '男' },
+	];
+	/**
+			new Map(name, data);
+				name: 主键，匹配数据的属性值(可以为'')
+				data: 值，可以为任何类型
+		*/
+	var map = new MapList('name', database);
+</script>
+<script type="text/javascript" code-output='map.get(url)<small>(url:/张三)</small>' outinput='get'>
+
+	/**
+		通过与浏览器url一样的方式访问json，更快速更具有可读性
+	*/
+
+	map.get('/张三/name');
+
+</script>
+<script type="text/javascript" code-output='map.add(name, data, url)<small>添加对象</small>' outinput='all'>
+
+	/**
+		更具特色的添加方式
+			name: 主键，匹配数据的属性值(可以为'')
+			data: 值，可以为任何类型,
+			url: 定位到指定位置添加内容(如果指定的路径不存在，会系统生成)
+	*/
+    
+	map.add('', { hello: ['world', 'goodbye'] }, '/new');
+	
+	map.add('', { hello: 'world' });
+
+
+</script>
+<script type="text/javascript" code-output='map.has()<small>判断对象是否存在</small>' outinput='has'>
+
+	/**
+		定位判断对象是否存在
+			url: 路径(必填)
+	*/
+    
+	map.has('/new');
+	
+	map.has('/a/b/c ');
+
+</script> 
+<script type="text/javascript" code-output='map.empty()<small>清除对象</small>' outinput='all'>
+
+	/**
+		清除指定对象
+			url: 路径(不填则清空全部对象)
+	*/
+    
+
+	map.empty('/张三/age');
+
+</script> 
+<script type="text/javascript" code-output='map.clone()<small>复制对象</small>' outinput='clone'>
+
+	/**
+		复制指定对象
+			url: 路径(不填则复制全部对象)
+				*复制生成的对象，属性的改动不会反射到被复制的元素上
+	*/
+    
+	var _cloneMap = map.clone('/new');
+	_cloneMap.empty('/new');
+
+</script> 
+<script type="text/javascript" code-output='map.keys()<small>获取对象键</small>' outinput='keys'>
+
+	/**
+		获取指定对象键
+			url: 路径(不填则复制全部对象)
+	*/
+    
+	map.keys();
+	map.keys('/张三')
+	
+
+</script> 
+
+</body>
+</html>

@@ -95,7 +95,7 @@ function format_url($data, url, last, generate){
 }
 //MapList主函数
 function MapList(k, v){
-	this.base().set('hidebasde', {});
+	this.base().set('default', 'v1.0.1');
 	this.add(k, v);
 }
 /**
@@ -127,8 +127,8 @@ MapList.prototype.get = function(url){
 	删除数组到对象
 	url: 路径
 */
-MapList.prototype.empty = function(url, $d){
-	var $this = $d || this,
+MapList.prototype.empty = function(url){
+	var $this = this,
 		_list = $this.base();
 	if (!url) {
 		each($this, function(k){
@@ -149,8 +149,14 @@ MapList.prototype.empty = function(url, $d){
 	url: 路径
 */
 MapList.prototype.has = function(url){
-	var $this = format_url(this, url, 'generate');
-	return typeof($this) == 'undefined' ? false : true;
+	if (url) {
+		var $this = format_url(this, url, 'generate');
+		return typeof($this) == 'undefined' ? false : true;
+	}else{
+		if (this.keys().length == 0) return false;
+		else return true;
+	}
+		
 }
 /**
 	获取mapList对象key集合
@@ -217,11 +223,3 @@ MapList.prototype.each = each;
 window.MapList = MapList;
 
 }(window, document))
-
-// var a = {
-// 	name: '张三',
-// 	age: 15,
-// 	gender: '女'
-// }
-// delete a.name
-// alert(JSON.stringify(a))
