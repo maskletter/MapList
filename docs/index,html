@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Map.js,让object更强大一点</title>
+	<title>MapList.js,让object更强大一点</title>
 	<link rel="stylesheet" type="text/css" href="../lib/codemirror.css">
 	<style type="text/css">
 		* { margin: 0px;padding: 0px; }
@@ -19,11 +19,11 @@
 	</style>
 	<script type="text/javascript" src='../lib/codemirror.js'></script>
 	<script type="text/javascript" src='../lib/javascript.js'></script>
-	<script type="text/javascript" src='../js/MapList.js'></script>
+	<script type="text/javascript" src='../js/MapList.min.js'></script>
 </head>
 <body>
 	<div id="container">
-		<h2>Map.js,让object更强大一点</h2>
+		<h2>MapList.js,让object更强大一点</h2>
 		<hr>
 	</div>
 <script type="text/javascript">

@@ -1,7 +1,7 @@
 /**
 	author: maskletter
 	data: 2017.5.15
-	version: v0.0.1
+	version: v1.0.1
 	remarks: mapList对象集合(非原生)，拓展object对象，丰富高级功能，路径定位，隐藏与删除
 */
 (function(window, document, undefined){
@@ -67,6 +67,7 @@ function each(a, f){
 }
 //格式化url
 function format_url($data, url, last, generate){
+	var _list = $data.base();
 	if(last == 'generate'){
 		generate = last;
 		last = undefined;
@@ -88,17 +89,13 @@ function format_url($data, url, last, generate){
 			else $data = $data[j];
 		})
 	}
-	if(last) $data.__proto__._urlpop = _urlpop;
+	if(last) _list.set('_urlpop', _urlpop);
 	return $data;
 	
 }
 //MapList主函数
 function MapList(k, v){
-	this.__proto__.option = {
-		hide: {
-			_21328173892173: 12321
-		}
-	}
+	this.base().set('hidebasde', {});
 	this.add(k, v);
 }
 /**
@@ -131,17 +128,20 @@ MapList.prototype.get = function(url){
 	url: 路径
 */
 MapList.prototype.empty = function(url, $d){
-	var $this = $d || this;
+	var $this = $d || this,
+		_list = $this.base();
 	if (!url) {
 		each($this, function(k){
 			delete $this[k];
 		})
-		return;
 	}
 	else {
 		var $this = format_url($this, url, 'shift', 'generate');
-		if ($this instanceof Array) $this.splice($this._urlpop, 1);
-		else delete $this[$this._urlpop];
+		var _urlpop = _list.get('_urlpop');
+		if ($this instanceof Array) $this.splice(_urlpop, 1);
+		else {
+			delete $this[_urlpop];
+		}
 	}
 }
 /**
@@ -184,7 +184,26 @@ MapList.prototype.clone = function(url){
 		})
 	return new MapList('', _);
 }
-
+/**
+ * 预留接口
+ * 仅限存储使用
+ */
+MapList.prototype.database = {};
+MapList.prototype.base = function(){
+	var $this = this;
+	return {
+		get: function(k){
+			return $this.database[k];
+		},
+		set: function(k, v){
+			$this.database[k] = v;
+			return $this.database[k];
+		},
+		remvoe: function(k){
+			delete $this.database[k];
+		}
+	}
+}
 /**
 	继承
 */
@@ -198,3 +217,11 @@ MapList.prototype.each = each;
 window.MapList = MapList;
 
 }(window, document))
+
+// var a = {
+// 	name: '张三',
+// 	age: 15,
+// 	gender: '女'
+// }
+// delete a.name
+// alert(JSON.stringify(a))
