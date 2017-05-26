@@ -1,8 +1,8 @@
 
 # MapList.js,让object在强大一点
 
-<span>压缩版仅2k，就能得到更可读性的object操作</span>
-<span>兼容ie8+,google chrome,Mozilla Firefox</span>
+<div>压缩版仅2k，就能得到更可读性的object操作</div>
+<div>兼容ie8+,google chrome,Mozilla Firefox</div>
 <br>
 <ul>
 	<li>1. 初始化MapList对象 &nbsp;&nbsp;<small>(new Map)</small></li>
